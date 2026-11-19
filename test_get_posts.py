@@ -109,4 +109,7 @@ def test_get_invalid_post_id():
         timeout=10
     )
 
-    assert
+    print("Status Code:", response.status_code)
+    print("Response:", response.text)
+
+    assert response.status_code == 404
