@@ -113,3 +113,36 @@ def test_get_invalid_post_id():
     print("Response:", response.text)
 
     assert response.status_code == 404
+
+ # Test Case 9
+  
+def test_filter_posts_by_user_id(): 
+    response = requests.get(
+        "https://jsonplaceholder.typicode.com/posts/",
+        params={"userId":1},
+        timeout=10
+    ) 
+
+    assert response.status_code == 200
+    posts = response.json()
+
+    assert isinstance(posts,list)
+    assert len(posts)>0
+
+    for post in posts:
+        assert post["userId"] == 1
+
+
+     # Test Case 10
+
+    def test_invalid_http_method():
+        response = requests.request(
+            "TRACE"
+             "https://jsonplaceholder.typicode.com/posts",
+             timeout=10
+        )
+
+        print("Status Code:", response.status_code)
+        print("Response:", response.text)
+
+        assert 400 <=response.status_code<600
