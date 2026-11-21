@@ -112,3 +112,27 @@ def test_patch_post_title():
     print("Status Code:", response.status_code)
 
     assert post ["title"] == data["title"]
+    
+
+#Test Case 3
+
+def test_patch_invalid_data_type():
+    url = "https://jsonplaceholder.typicode.com/posts/1"
+    data = {
+        "title" : 123
+    }  
+    response = requests.patch(
+        url,
+        json=data,
+        timeout=10
+    )
+
+    print("Sent Data:", data)
+    print("Status Code:", response.status_code)
+    print("Response Data:", response.text)
+
+    assert response.status_code == 200
+
+    post = response.json()
+    assert post["title"] == data["title"]
+    assert isinstance(post["title"],int)
